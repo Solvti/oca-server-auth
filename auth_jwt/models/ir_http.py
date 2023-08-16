@@ -24,7 +24,7 @@ class IrHttpJwt(models.AbstractModel):
     _inherit = "ir.http"
 
     @classmethod
-    def _authenticate(cls, auth_method="user"):
+    def _authenticate(cls, endpoint):
         """Protect the _authenticate method.
 
         This is to ensure that the _authenticate method is called
@@ -32,6 +32,9 @@ class IrHttpJwt(models.AbstractModel):
         When migrating, review this method carefully by reading the original
         _authenticate method and make sure the conditions have not changed.
         """
+        auth_method = endpoint.routing["auth"]
+        if request._is_cors_preflight(endpoint):
+            auth_method = 'none'
         if (
             auth_method in ("jwt", "public_or_jwt")
             or auth_method.startswith("jwt_")
@@ -47,10 +50,10 @@ class IrHttpJwt(models.AbstractModel):
             # because _authenticate will not call _auth_method_jwt a second time.
             if request.uid and not hasattr(request, "jwt_payload"):
                 _logger.error(
-                    "A route with auth='jwt' should not have a request.uid here."
+                    'A route with auth="jwt" should not have a request.uid here.'
                 )
                 raise UnauthorizedSessionMismatch()
-        return super()._authenticate(auth_method)
+        return super()._authenticate(endpoint)
 
     @classmethod
     def _auth_method_jwt(cls, validator_name=None):
