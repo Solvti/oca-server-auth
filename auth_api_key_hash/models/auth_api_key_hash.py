@@ -22,7 +22,10 @@ class AuthApiKeyHash(models.Model):
         the api key""",
     )
 
-    _sql_constraints = [("name_uniq", "unique(name)", "Api Key name must be unique.")]
+    _sql_constraints = [
+        ("name_uniq", "unique(name)", "Api Key name must be unique."),
+        ("key_uniq", "unique(key)", "Api Key must be unique."),
+    ]
 
     @api.model
     def _retrieve_api_key(self, key):

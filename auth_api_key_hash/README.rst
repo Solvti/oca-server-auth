@@ -81,15 +81,12 @@ Credits
 Authors
 ~~~~~~~
 
-* ACSONE SA/NV
+* Solvti Sp. z o.o.
 
 Contributors
 ~~~~~~~~~~~~
 
-* Denis Robinet <denis.robinet@acsone.eu>
-* Laurent Mignon <laurent.mignon@acsone.eu>
-* Quentin Groulard <quentin.groulard@acsone.eu>
-* Sébastien Beau <sebastien.beau@akretion.com>
+* Stefan Wiselka <stefan.wiselka@solvti.pl>
 
 Maintainers
 ~~~~~~~~~~~
